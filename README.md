@@ -83,7 +83,7 @@ This project investigates how transfer learning and data augmentation can enhanc
 ## 🛠️ How to Run
 ```bash
 # Clone repository
-git clone https://github.com/<your-org>/<your-repo>.git
+git clone https://github.com/Linda-Masia/COS_760__Project.git
 cd <your-repo>
 
 # (Optional) Set up virtual environment
@@ -105,7 +105,7 @@ python evaluate.py
 ```bash
 
 # Step 1: Clone repository
-!git clone https://github.com/<your-org>/<your-repo>.git
+!git clone https://github.com/Linda-Masia/COS_760__Project.git
 %cd <your-repo>
 
 # Step 2: Install dependencies
