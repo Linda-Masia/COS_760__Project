@@ -1,133 +1,76 @@
 # Leveraging Transfer Learning and Data Augmentation for Multilabel Emotion Classification in Bantu Languages
 
 **Contributors:**  
-- Sharika Kanti Narsing 
+- Sharika Kanti Narsing  
 - Linda Masia  
-- Simphiwe Nonabe 
+- Simphiwe Nonabe  
 
 ---
 
-## 📌 Research Question
-How can different transfer learning approaches, such as cross-lingual models and adapter-based methods, be leveraged to improve multilabel emotion analysis in low-resource African languages?
+## Overview  
+This project explores transfer learning and data augmentation techniques to improve multilabel emotion classification in low-resource African (Bantu) languages using the BRIGHTER dataset. All experiments, data processing, model training, and evaluation are contained within a single Jupyter notebook.
 
 ---
 
-## 🧠 Problem Statement
-Although Africa is home to over 2,000 languages, natural language processing (NLP) research remains heavily focused on high-resource languages. Emotion analysis, an important area in NLP with applications in mental health, education, customer support, and policymaking, is underexplored in African languages due to a lack of annotated data and tools.  
-
-The BRIGHTER dataset contributes to addressing this gap by offering multilabel and intensity-based emotion annotations across 28 African languages. However, building generalizable models remains difficult due to limited data and the linguistic diversity of African languages.  
-
-This project investigates how transfer learning and data augmentation can enhance multilabel emotion classification, focusing on English samples from the BRIGHTER dataset as a base for improving performance in low-resource Bantu languages.
+## Contents of the Zip File  
+- `Brighter_Final.ipynb` — Main Jupyter notebook containing all project code and experiments  
+- `README.md` — This file  
 
 ---
 
-## 📂 Dataset
-**BRIGHTER Emotion Dataset**  
-📍 [Hugging Face Dataset Link](https://huggingface.co/datasets/brighter-dataset/BRIGHTER-emotion-categories)  
+## Setup Instructions  
 
-- **Languages**: 28 African languages  
-- **Total Records**: 139,595  
-- **Attributes**:  
-  `id`, `text` (utterance),  
-  `anger`, `disgust`, `fear`, `joy`, `sadness`, `surprise` (binary labels),  
-  `emotions` (summary of multilabels)  
-- **Focus Language**: English (7,290 entries)
+1. Download and install [Anaconda](https://www.anaconda.com/products/distribution) or ensure you have Python 3.8+ and Jupyter installed.
 
----
+2. Create and activate a virtual environment (optional but recommended):  
+   ```bash
+   conda create -n brighter python=3.8 -y
+   conda activate brighter
+   ```
 
-## 🧪 Methodology
-### 🔄 Preprocessing
-- Clean text (normalisation, deduplication)  
-- Handle inconsistent or missing labels  
-- Represent multilabels as binary vectors (e.g., `[1, 0, 1, 0, 0, 1]` for three active emotions)  
-
-### 📊 Baseline
-- Fine-tune Multilingual BERT (mBERT) on English samples as a foundation for cross-lingual transfer  
-
-### 🚀 Transfer Learning Approaches
-1. **Cross-lingual Fine-tuning**  
-   - Fine-tune mBERT on English + low-resource African language subsets  
-   - Leverages shared semantic space across languages  
-
-2. **Adapter-based Learning**  
-   - Introduce lightweight adapter modules into mBERT  
-   - Train adapters on emotion-labelled samples while keeping base model frozen  
-   - Ideal for limited data/compute environments  
-
-### 🔁 Data Augmentation
-- Apply back-translation on English samples to generate additional training instances  
-- Improves generalisation for small African language datasets  
-
-### 📈 Evaluation Strategy
-- **Baseline**: mBERT fine-tuned on English BRIGHTER data  
-- **Metrics**:  
-  Precision, Recall, F1-score (macro & samples)  
-  Hamming Loss, Jaccard Similarity, AUC-ROC  
-- **Statistical Tests**: Paired t-tests  
-- **Error Analysis**: Confusion matrices and case-wise inspection  
+3. Install required Python packages:  
+   ```bash
+   pip install -r requirements.txt
+   ```  
+   *(If `requirements.txt` is not included, install dependencies manually: `transformers`, `datasets`, `torch`, `scikit-learn`, `pandas`, etc.)*
 
 ---
 
-## � Expected Outputs & Contributions
-- Robust mBERT performance on English multilabel classification  
-- **12–18% F1-score improvement** on low-resource African languages via transfer learning  
-- Enhanced generalisability through data augmentation  
-- **Public release of**:  
-  - Emotion classification pipeline  
-  - Language-specific adapter modules  
-  - Preprocessing/evaluation scripts  
-- Applications in mental health monitoring, education analytics, and cultural insight tools  
+## Running the Code  
+
+1. Open the notebook:  
+   ```bash
+   jupyter notebook Brighter_Final.ipynb
+   ```  
+   or launch Jupyter from your IDE.
+
+2. Follow the notebook cells sequentially to reproduce data loading, preprocessing, model training, and evaluation steps.
 
 ---
 
-## 🛠️ How to Run
-```bash
-# Clone repository
-git clone https://github.com/Linda-Masia/COS_760__Project.git
-cd COS_760__Project
+## Data Information  
 
-# (Optional) Set up virtual environment
-python -m venv env
-source env/bin/activate  # Linux/Mac
-# For Windows: env\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run training
-python train.py
-
-# Evaluate model
-python evaluate.py
-```
-🧪 Run in Google Colab
-
-```bash
-
-# Step 1: Clone repository
-!git clone https://github.com/Linda-Masia/COS_760__Project.git
-%cd COS_760__Project
-
-# Step 2: Install dependencies
-!pip install -r requirements.txt
-
-# Step 3: Load BRIGHTER dataset
-from datasets import load_dataset
-dataset = load_dataset("brighter-dataset/BRIGHTER-emotion-categories")
-print(dataset["train"][0])  # View sample
-
-# Step 4: Fine-tune model
-!python train.py
-
-# Step 5: Evaluate
-!python evaluate.py
-
-```
-[▶️ Open in Colab](https://colab.research.google.com)
+- The notebook uses the **BRIGHTER Emotion Dataset**, which is loaded dynamically using the `datasets` library from Hugging Face.  
+- The dataset is **not included** in the zip file due to its size.  
+- To download, run the following code inside the notebook:  
+  ```python
+  from datasets import load_dataset
+  dataset = load_dataset("brighter-dataset/BRIGHTER-emotion-categories")
+  ```  
+- Ensure you have internet access when running the notebook to load the dataset.
 
 ---
 
-## 📚 References
+## Notes  
+
+- The notebook is self-contained; all code, explanations, and results are combined in one place for ease of use and reproducibility.  
+- For best results, run on a machine with GPU support or use Google Colab.  
+- [Optional] You can upload the notebook to Google Colab and run it interactively:  
+  [▶️ Open in Colab](https://colab.research.google.com)
+
+---
+
+## References  
 1. [BRIGHTER Dataset on Hugging Face](https://huggingface.co/datasets/brighter-dataset/BRIGHTER-emotion-categories)  
-2. Devlin, J., Chang, M. W., Lee, K., & Toutanova, K. (2019). [**BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding**](https://arxiv.org/abs/1810.04805)  
-3. Pfeiffer, J., Kamath, A., Rücklé, A., Cho, K., & Gurevych, I. (2021). [**AdapterFusion: Non-Destructive Task Composition for Transfer Learning**](https://arxiv.org/abs/2005.00247)
+2. Devlin, J. et al. (2019). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding.  
+3. Pfeiffer, J. et al. (2021). AdapterFusion: Non-Destructive Task Composition for Transfer Learning.
